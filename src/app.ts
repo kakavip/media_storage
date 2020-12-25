@@ -10,6 +10,8 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
+import multer from 'multer';
+import fileUpload from 'express-fileupload';
 
 class App {
   public app: express.Application;
@@ -22,6 +24,7 @@ class App {
     this.env = process.env.NODE_ENV || 'production';
 
     this.initializeMiddlewares();
+    this.initializeMedias();
     this.initializeRoutes(routes);
     this.initializeSwagger();
     this.initializeErrorHandling();
@@ -52,6 +55,14 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+  }
+
+  private initializeMedias() {
+    this.app.use(
+      fileUpload({
+        createParentPath: true,
+      }),
+    );
   }
 
   private initializeRoutes(routes: Routes[]) {

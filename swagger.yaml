@@ -1,8 +1,46 @@
 tags:
 - name: users
   description: users API
+- name: file_info
+  description: "File info"
 
 paths:
+# Upload files
+  /files/upload:
+    post:
+      tags:
+      - file_info
+      summary: Upload file to storage
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/file_info'
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server Error"
+# Remove file
+  /files/remove:
+    put:
+      tags:
+      - file_info
+      summary: Upload file to storage
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/file_info'
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server Error"
 # [GET] users
   /users:
     get:
@@ -120,6 +158,25 @@ definitions:
       password:
         type: string
         description: user Password
+
+  file_info:
+    type: object
+    required:
+      - bucket
+      - key
+    properties:
+      bucket:
+        type: string
+        description: "name of bucket root path for storage."
+      key:
+        type: string
+        description: "path to object which saved on storage."
+
+      file:
+        type: file
+        description: "file upload"
+
+
 
 schemes:
  - https
