@@ -10,7 +10,6 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
-import multer from 'multer';
 import fileUpload from 'express-fileupload';
 
 class App {
