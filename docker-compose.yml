@@ -19,6 +19,7 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+      - media_storage:/app/storages
     restart: "unless-stopped"
     networks:
       - backend
@@ -28,5 +29,6 @@ networks:
     driver: bridge
 
 volumes:
+  media_storage:
   data:
     driver: local
